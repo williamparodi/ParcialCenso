@@ -111,13 +111,20 @@ int main(void)
 						}
 						break;
 					case 5:
-						if(!asignarZona(listaZona,LEN_ZONA,listCensista,LEN_CENSISTA,idCensista, idZona))
+						if(noEstaVaciaZona(listaZona,LEN_ZONA))
 						{
-							printf("Zona asignada\n");
+							if(!asignarZona(listaZona,LEN_ZONA,listCensista,LEN_CENSISTA,idCensista, idZona))
+							{
+								printf("Zona asignada\n");
+							}
+							else
+							{
+								printf("Error al asignar zona\n");
+							}
 						}
 						else
 						{
-							printf("Error al asignar zona\n");
+							printf("Primero deberia cargar zona\n");
 						}
 						break;
 					case 6:
