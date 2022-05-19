@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
 #include "utn.h"
 #include "menu.h"
 #include "censistas.h"
@@ -36,44 +35,7 @@ int inicializarCensista(Censista list[], int len)
 	}
 	return retrono;
 }
-/*
-int cargarCensista(Censista list[], int len,Fecha listaFecha[],int lenfecha,Direccion listaDire[],int lenDire)
-{
-	int retorno;
-	int index;
-	retorno=-1;
-	Censista aux;
-	if(list != NULL && len > 0)
-		{
-			index = buscaLugarVacio(list,len);
-			if(index != -1)
-			{
-				if(!utn_getNombreCompleto(aux.nombre,"Ingrese nombre del censista:\n","Error,solo letras\n",50,5) &&
-					!utn_getNombreCompleto(aux.apellido,"Ingrese apellido del censista:\n","Error,solo letras\n",50,5) &&
-					!utn_getInt(&aux.edad,"Ingrese edad del censista:\n","Error, solo mayores a 18 años\n",18,150,5)&&
-					!utn_getInt(&aux.nacimiento.dia,"Ingrese dia de nacimiento\n","Error,dia invalido\n",1,31,5) &&
-					!utn_getInt(&aux.nacimiento.mes,"Ingrese el mes de nacimiento\n","Error,mes invalido\n",1,12,5) &&
-					!utn_getInt(&aux.nacimiento.anio,"Ingres el anio de nacimiento\n","Error,anio incorrecto\n",1930,2002,5) &&
-					!utn_getNombreCompleto(aux.direCensista.calleDireccion,"Ingrese el nombre de la calle\n","Error solo letras\n",50,5)&&
-					!utn_getInt(&aux.direCensista.altura,"Ingrese altura:\n","Error al ingresar altura\n",10,20000,5))
 
-				{
-					aux.idCensista = incrementaId();
-					aux.estado=LIBERADO;
-					aux.isEmpty=LLENO;
-					list[index] = aux;
-					printf("Censista cargado\n");
-					printf("-------------------------------------------------------------------------------------------------\n");
-					printf("Id   Nombre   	      Apellido      Edad      Fecha      Direccion                 Estado     	 \n");
-					printf("-------------------------------------------------------------------------------------------------\n");
-					mostrarUnCensista(list[index]);
-					retorno=0;
-				}
-			}
-		}
-	return retorno;
-}
-*/
 int modificarCensistas(Censista list[],int len,int id)
 {
 	int retorno;
@@ -287,7 +249,6 @@ int bajaCensista(Censista list[], int len, int id)
 					if(opcion ==1 && list[index].estado != ACTIVO)
 					{
 						list[index].estado = INACTIVO;
-						list[index].isEmpty = 1;
 						printf("Censista borrado\n");
 						retrono=0;
 					}

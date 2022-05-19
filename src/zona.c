@@ -186,7 +186,7 @@ int mostrarZonasConCensados(Zona list[],int len)
 	if(list != NULL && len >0)
 	{
 		printf("-----------------------------------------Zonas----------------------------------------------------------\n");
-		printf("Id   Calles   	 		      Localidad         Estado     Nombre y Apellido Censista Responsable\n");
+		printf("Id   Calles   	 		      Localidad         Estado    	      Nombre y Apellido Censista Responsable\n");
 		printf("--------------------------------------------------------------------------------------------------------\n");
 		for(int i=0;i<len;i++)
 		{
@@ -218,17 +218,18 @@ int asignarZona(Zona listZona[],int lenZona,Censista listCensita[],int lenCensis
 		if(!utn_getInt(&idCensista,"\nIngrese el id del censista a asignar:\n","Error,id incorrecto\n",1000,2000,5))
 		{
 			index = buscarCensistaPorId(listCensita,lenCensista,idCensista);
-			if(index != -1 && listCensita[index].estado!=ACTIVO)
+			if(index != -1 && listCensita[index].estado==LIBERADO)
 			{
 				mostrarZonas(listZona,lenZona);
 				if(!utn_getInt(&idZona,"\nIngrese el id de la zona a asignar\n","Error,id incorrecto\n",100,500,5))
 				{
 					indexZona = buscarZonaPorId(listZona,lenZona,idZona);
-					if(indexZona != -1 && listZona[index].estadoZona != FINALIZADO)
+					if(indexZona != -1 && listZona[indexZona].estadoZona != FINALIZADO && listCensita[indexZona].estado ==LIBERADO)
 					{
 						strcpy(listZona[indexZona].responsable.nombre,listCensita[index].nombre);
 						strcpy(listZona[indexZona].responsable.apellido,listCensita[index].apellido);
 						listCensita[index].estado=ACTIVO;
+						listZona[indexZona].responsable.idCensista = listCensita[index].idCensista;
 						retorno=0;
 					}
 					else
@@ -239,7 +240,14 @@ int asignarZona(Zona listZona[],int lenZona,Censista listCensita[],int lenCensis
 			}
 			else
 			{
-				printf("Ya esta en actividad\n");
+				if(listCensita[index].estado==ACTIVO)
+				{
+					printf("Ya esta en actividad\n");
+				}
+				else
+				{
+					printf("Ya esta dado de Baja\n");
+				}
 			}
 		}
 	}
@@ -282,23 +290,24 @@ int cargaDeDatosZona(Zona listZona[],int lenZona,Censista listCensista[],int len
 		if(!utn_getInt(&idZona,"Ingrese id Zona:\n","Error,id invalido\n",101,500,5))
 		{
 			indexZona=buscarZonaPorId(listZona,lenZona,idZona);
-			if(indexZona!=-1)
+			if(indexZona!=-1 && listZona[indexZona].estadoZona==PENDIENTE)
 			{
 				mostrarSoloCensistasDeAlta(listCensista,lenCensista);
 				if(!utn_getInt(&idCensista,"Ingrese id censista:\n","Error,id invalido\n",1001,2000,5))
 				{
 					index=buscarCensistaPorId(listCensista,lenCensista,idCensista);
-					if(index!=-1 && listCensista[index].estado==ACTIVO)
+					if(index!=-1 && listCensista[index].estado==ACTIVO &&
+							listCensista[index].idCensista == listZona[indexZona].responsable.idCensista)
 					{
-						if(!utn_getInt(&aux.censadosInSitu,"Ingrese cantidad de censados in situ\n","Error,dato incorrecton",0,10000,5))
+						if(!utn_getInt(&aux.censadosInSitu,"Ingrese cantidad de censados in situ:\n","Error,dato incorrecton",0,10000,5))
 						{
 							listZona[indexZona].censadosInSitu=aux.censadosInSitu;
 						}
-						if(!utn_getInt(&aux.censadosVirtual,"Ingrese cantidad de censados virtual\n","Error,dato incorrecto\n",0,10000,5))
+						if(!utn_getInt(&aux.censadosVirtual,"Ingrese cantidad de censados virtual:\n","Error,dato incorrecto\n",0,10000,5))
 						{
 							listZona[indexZona].censadosVirtual=aux.censadosVirtual;
 						}
-						if(!utn_getInt(&aux.censadosAusentes,"Ingrese cantidad de ausentes\n","Error,dato incorrecto\n,",0,10000,5))
+						if(!utn_getInt(&aux.censadosAusentes,"Ingrese cantidad de ausentes:\n","Error,dato incorrecto\n,",0,10000,5))
 						{
 							listZona[indexZona].censadosAusentes= aux.censadosAusentes;
 						}
@@ -311,6 +320,10 @@ int cargaDeDatosZona(Zona listZona[],int lenZona,Censista listCensista[],int len
 						printf("El censista no existe o no esta activo\n");
 					}
 				}
+			}
+			else
+			{
+				printf("Esa zona ya fue censada\n");
 			}
 		}
 	}
@@ -332,6 +345,8 @@ int cargaForzadaZona(Zona listZona[],int len,Zona listaForzadaZona[],int lenForz
 				listZona[i]= listaForzadaZona[i];
 				listZona[i].isEmpty = LLENO;
 				listZona[i].estadoZona=PENDIENTE;
+				strcpy(listZona[i].responsable.nombre,"NO ASIGNADO");
+				strcpy(listZona[i].responsable.apellido,"NO ASIGNADO");
 				mostrarUnaZona(listZona[i]);
 			}
 			retorno=0;
