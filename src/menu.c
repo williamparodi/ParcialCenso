@@ -15,6 +15,7 @@ void menuCenso()
 	printf("9-Mostrar zonas\n");
 	printf("10-Carga Forzada Censistas\n");
 	printf("11-Carga Forzada Zonas\n");
+	printf("12-Informes\n");
 	printf("12-Salir\n");
 }
 

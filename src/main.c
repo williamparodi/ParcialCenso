@@ -190,8 +190,14 @@ int main(void)
 						}
 						break;
 					case 12:
+						printf("Informes:\n");
+						printf("Informe 1:\n");
 						contarCensistasActivosConPendiente(listCensista,LEN_CENSISTA,listaZona,LEN_ZONA,&contadorCensisActivosPendiente);
 						printf("Cantidad de censistas activos con zona pendiente: %d\n",contadorCensisActivosPendiente);
+						printf("Informes 2:\n");
+						ordenarPorApellidoYNombre(listCensista,LEN_CENSISTA);
+						mostrarCensistas(listCensista,LEN_CENSISTA);
+						printf("Informes 3:\n");
 						cantCasasAusentes(listaZona,LEN_ZONA);
 						break;
 					case 13:
