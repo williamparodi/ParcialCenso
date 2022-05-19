@@ -26,4 +26,5 @@ int mostrarSoloCensistasDeAlta(Censista list[],int len);
 void mostrarUnCensista(Censista unCensista);
 int noEstaVacio(Censista list[],int len);
 int cargaForzada(Censista list[],int len,Censista listaForzada[],int lenForzado);
+
 #endif /* CENSISTAS_H_ */

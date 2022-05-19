@@ -28,4 +28,6 @@ void mostrarUnaZona(Zona unaZona);
 int mostrarZonas(Zona list[],int len);
 int mostrarZonasConCensados(Zona list[],int len);
 int cargaForzadaZona(Zona listZona[],int len,Zona listaForzadaZona[],int lenForzado);
+int cantidadDeCensadosTotal(Zona list[],int len,int* total);
+int bajaZona(Zona list[],int len,int idZona);
 #endif /* ZONA_H_ */

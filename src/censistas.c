@@ -407,3 +407,6 @@ int cargarCensista(Censista list[], int len,Fecha listaFecha[],int lenfecha,Dire
 		}
 	return retorno;
 }
+
+
+

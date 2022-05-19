@@ -355,3 +355,43 @@ int cargaForzadaZona(Zona listZona[],int len,Zona listaForzadaZona[],int lenForz
 	return retorno;
 }
 
+int bajaZona(Zona list[],int len,int idZona)
+{
+	int retrono;
+	int index;
+	int opcion;
+	retrono = -1;
+	if(list != NULL && len >0 && idZona >0)
+	{
+		if(noEstaVaciaZona(list,len))
+		{
+			printf("-----------------------------------Baja--de--Zona--------------------------------------------------\n");
+			printf("Id   Calles   	 		      Localidad         Estado    	      Nombre y Apellido Censista Responsable\n");
+			printf("--------------------------------------------------------------------------------------------------------\n");
+			mostrarZonas(list,len);
+			if(!utn_getInt(&idZona,"\nIngrese el id de la zona a borrar:\n","Error,id incorrecto\n",100,500,5))
+			{
+				index = buscarZonaPorId(list,len,idZona);
+				if(index != -1)
+				{
+					utn_getInt(&opcion,"Esta seguro que quiere borrar esta zona? 1-Si o 2-No\n",
+							"Error,opcion incorrecta\n",1,2,5);
+					mostrarUnaZona(list[index]);
+					if(opcion ==1 && list[index].estadoZona==PENDIENTE)
+					{
+						list[index].estadoZona = FINALIZADO;
+						printf("Zona borrado\n");
+						retrono=0;
+					}
+					else
+					{
+						printf("No se pudo dar de baja ya esta finalizada\n");
+						retrono=1;
+					}
+				}
+			}
+		}
+	}
+	return retrono;
+}
+

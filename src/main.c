@@ -138,6 +138,16 @@ int main(void)
 						}
 						break;
 					case 7:
+						if(noEstaVaciaZona(listaZona,LEN_ZONA))
+						{
+							bajaZona(listaZona,LEN_ZONA,idZona);
+						}
+						else
+						{
+							printf("Primero deberia cargar zonas\n");
+						}
+						break;
+					case 8:
 						if(noEstaVacio(listCensista,LEN_CENSISTA))
 						{
 							mostrarCensistas(listCensista,LEN_CENSISTA);
@@ -147,7 +157,7 @@ int main(void)
 							printf("Primero deberia cargar censistas\n");
 						}
 						break;
-					case 8:
+					case 9:
 						if(noEstaVaciaZona(listaZona,LEN_ZONA))
 						{
 							mostrarZonasConCensados(listaZona,LEN_FORZADA);
@@ -157,7 +167,7 @@ int main(void)
 							printf("Primero deberia cargar zonas y datos de censados\n");
 						}
 						break;
-					case 9:
+					case 10:
 						if(!cargaForzada(listCensista,LEN_CENSISTA,listaForzada,LEN_FORZADA))
 						{
 							printf("Carga forzada exitosa\n");
@@ -167,7 +177,7 @@ int main(void)
 							printf("Error, al cargar\n");
 						}
 						break;
-					case 10:
+					case 11:
 						if(!cargaForzadaZona(listaZona,LEN_ZONA,listaForzaZona,LEN_ZONAFORZADA))
 						{
 							printf("Carga forzada de zona exitosa\n");
@@ -177,11 +187,11 @@ int main(void)
 							printf("Error, al cargar\n");
 						}
 						break;
-					case 11:
+					case 12:
 						printf("Gracias por utilizar nuestro programa\n");
 						break;
 				}
 			}
-		}while(opcion != 11);
+		}while(opcion != 12);
 		return 0;
 }

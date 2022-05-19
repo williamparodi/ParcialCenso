@@ -10,11 +10,12 @@ void menuCenso()
 	printf("4-Cargar zona\n");
 	printf("5-Asignar zona a censar\n");
 	printf("6-Carga de datos\n");
-	printf("7-Mostrar censistas\n");
-	printf("8-Mostrar zonas\n");
-	printf("9-Carga Forzada Censistas\n");
-	printf("10-Carga Forzada Zonas\n");
-	printf("11-Salir\n");
+	printf("7-Baja Zona\n");
+	printf("8-Mostrar censistas\n");
+	printf("9-Mostrar zonas\n");
+	printf("10-Carga Forzada Censistas\n");
+	printf("11-Carga Forzada Zonas\n");
+	printf("12-Salir\n");
 }
 
 void menuModificarCensista()
