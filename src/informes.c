@@ -62,7 +62,7 @@ int ordenarPorApellidoYNombre(Censista list[],int len)
 					else
 					{
 						if(strcmp(list[i].apellido,list[i + 1].apellido)==0
-								&& (strcmp(list[i].nombre,list[i + 1].nombre)<0))
+								&& (strcmp(list[i].nombre,list[i + 1].nombre)!=0))
 						{
 							aux = list[i];
 							list[i] = list[i + 1];
