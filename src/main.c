@@ -14,6 +14,7 @@
 #include "censistas.h"
 #include "utn.h"
 #include "zona.h"
+#include "informes.h"
 #define LEN_CENSISTA 2000
 #define LEN_FORZADA 5
 #define LEN_FECHA 2000
@@ -26,6 +27,7 @@ int main(void)
 	setbuf(stdout,NULL);
 	int idCensista=1000;
 	int idZona=100;
+	int contadorCensisActivosPendiente=0;
 	int opcion;
 	Censista listCensista[LEN_CENSISTA];
 	Fecha listaFecha[LEN_FECHA];
@@ -52,7 +54,7 @@ int main(void)
 	do
 		{
 			menuCenso();
-			if(!utn_getInt(&opcion,"Ingrese una opcion:","Error,opcion invalida\n",1,11,5))
+			if(!utn_getInt(&opcion,"Ingrese una opcion:","Error,opcion invalida\n",1,13,5))
 			{
 				switch(opcion)
 				{
@@ -188,10 +190,15 @@ int main(void)
 						}
 						break;
 					case 12:
+						contarCensistasActivosConPendiente(listCensista,LEN_CENSISTA,listaZona,LEN_ZONA,&contadorCensisActivosPendiente);
+						printf("Cantidad de censistas activos con zona pendiente: %d\n",contadorCensisActivosPendiente);
+						cantCasasAusentes(listaZona,LEN_ZONA);
+						break;
+					case 13:
 						printf("Gracias por utilizar nuestro programa\n");
 						break;
 				}
 			}
-		}while(opcion != 12);
+		}while(opcion != 13);
 		return 0;
 }
